@@ -1,0 +1,66 @@
+- name: Make your console awesome with oh-my-zsh and starship
+  hosts: localhost
+  vars:
+    zshrc_file: "{{ ansible_env.HOME }}/.zshrc"
+  
+  tasks:
+    - name: Install necessary packages
+      package:
+        name:
+          - zsh
+          - unzip
+          - curl
+          - console-setup
+          - fontconfig
+        state: latest
+      become: yes
+
+    - name: Install oh-my-zsh
+      git:
+        repo: https://github.com/ohmyzsh/ohmyzsh.git
+        dest: ~/.oh-my-zsh
+        depth: 1
+    
+    - name: Copy source zshrc
+      copy:
+        src: config_files/zshrc
+        dest: ~/.zshrc
+        mode: 0644
+
+    - name: Copy source zsh_aliases
+      copy:
+        src: config_files/zsh_aliases
+        dest: ~/.zsh_aliases
+        mode: 0644
+
+    - name: Install zsh-autosuggestions plugin
+      git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+        depth: 1
+
+    - name: Ensure fonts directory exists
+      file:
+        path: "{{ ansible_env.HOME }}/.fonts"
+        state: directory
+
+    - name: Download Hermit font
+      ansible.builtin.unarchive:
+        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hermit.zip
+        dest: ~/.fonts/
+        remote_src: yes
+
+    - name: Rebuild font cache
+      shell: fc-cache -f
+
+    - name: Download and run starship install script
+      shell: curl -sS https://starship.rs/install.sh | sh -s -- -y
+
+    - name: Add starship to zsh
+      lineinfile:
+        path: "{{ zshrc_file }}"
+        regexp: '^eval.*starship init zsh'
+        line: eval "$(starship init zsh)"
+
+    - name: Set zsh to be the default shell
+      shell: chsh -s $(which zsh)

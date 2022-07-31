@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  ansible:
+    build:
+      context: .
+    volumes: 
+      - .:/root/app
+    tty: true
