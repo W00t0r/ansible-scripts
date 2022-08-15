@@ -1,7 +1,6 @@
 - name: Make your console awesome with oh-my-zsh and starship
   hosts: localhost
   roles:
-    - zsh-console
-    # TODO: Add the rest of the tasks to zsh-console role
-  vars:
-    zshrc_file: "{{ ansible_env.HOME }}/.zshrc"
+    - role: zsh-console
+      vars:
+        zshrc_file: "{{ ansible_env.HOME }}/.zshrc"

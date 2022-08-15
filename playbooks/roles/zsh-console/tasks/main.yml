@@ -15,7 +15,6 @@
     dest: ~/.oh-my-zsh
     depth: 1
 
-# TODO: Check dotfiles before overwriting them
 - name: Copy source zshrc
   ansible.builtin.copy:
     src: config_files/zshrc
@@ -23,7 +22,6 @@
     mode: 0644
     force: no
 
-# TODO: Check dotfiles before overwriting them
 - name: Copy source zsh_aliases
   ansible.builtin.copy:
     src: config_files/zsh_aliases
@@ -51,6 +49,7 @@
 - name: Rebuild font cache
   shell: fc-cache -f
 
+# TODO: Can we check if starship is already installed, instead of running it every time?
 - name: Download and run starship install script
   shell: curl -sS https://starship.rs/install.sh | sh -s -- -y
 
