@@ -61,6 +61,3 @@
         path: "{{ zshrc_file }}"
         regexp: '^eval.*starship init zsh'
         line: eval "$(starship init zsh)"
-
-    - name: Set zsh to be the default shell
-      shell: chsh -s $(which zsh)

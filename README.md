@@ -9,7 +9,7 @@ To start and enter the container:
 `docker-compose exec ansible bash`
 
 Inside the container we can run the playbooks now. To run them all:
-`ansible-playbook playbooks/zsh/*.yml`
+`ansible-playbook -K playbooks/zsh/*.yml`
 
 After the setup is finished start zsh to check out the new setup.
 To check out astronvim, simply start neovim with `nvim`.

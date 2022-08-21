@@ -31,3 +31,5 @@
         path: "{{ zshrc_file }}"
         regexp: '^eval.*zoxide init zsh'
         line: eval "$(zoxide init zsh)"
+
+    # TODO: Add tldr
