@@ -1,0 +1,6 @@
+- name: Make your console awesome with oh-my-zsh and starship
+  hosts: localhost
+  roles:
+    - role: zsh-console
+      vars:
+        zshrc_file: "{{ ansible_env.HOME }}/.zshrc"
