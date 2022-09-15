@@ -4,6 +4,7 @@
       - git
       - ripgrep
       - fd-find
+      - build-essential
     state: latest
   become: yes
 
@@ -15,6 +16,9 @@
 
 - name: Install bat
   shell: "{{ ansible_env.HOME }}/.cargo/bin/cargo install --locked bat"
+
+- name: Install tealdeer
+  shell: "{{ ansible_env.HOME }}/.cargo/bin/cargo install tealdeer"
     
 - name: Install zoxide
   shell: "{{ ansible_env.HOME }}/.cargo/bin/cargo install --locked zoxide"
