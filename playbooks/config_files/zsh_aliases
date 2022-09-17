@@ -11,7 +11,6 @@ alias exa='$HOME/.cargo/bin/exa'
 alias ll='exa -hal'
 
 # Replace cat with bat
-alias bat='batcat'
 alias cat='bat'
 
 # Replace find with fd
