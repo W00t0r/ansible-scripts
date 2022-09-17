@@ -1,0 +1,10 @@
+- name: Install required packages
+  package:
+    name:
+      - git
+      - curl
+      - gzip
+      - ripgrep
+      - fzf
+    state: latest
+  become: yes
